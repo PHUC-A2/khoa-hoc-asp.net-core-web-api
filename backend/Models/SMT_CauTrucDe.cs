@@ -1,7 +1,12 @@
-﻿namespace backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace backend.Models
 {
+    [Table("SMT_CauTrucDe")]
     public class SMT_CauTrucDe
     {
+        [Key]
         public long id { get; set; }
 
         public long id_mon { get; set; }
@@ -37,5 +42,8 @@
         public int so_cau_hoi { get; set; }
 
         public long id_he { get; set; }
+
+        // Relationship
+        public ICollection<SMT_CauTrucDe_ThanhPhan>? ThanhPhans { get; set; }
     }
 }

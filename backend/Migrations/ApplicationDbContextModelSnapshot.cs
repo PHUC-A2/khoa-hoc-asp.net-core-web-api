@@ -84,7 +84,7 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("SMT_CauTrucDes");
+                    b.ToTable("SMT_CauTrucDe");
                 });
 
             modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
@@ -96,7 +96,8 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"));
 
                     b.Property<decimal>("coefficient")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("created_time")
                         .HasColumnType("datetime2");
@@ -129,14 +130,17 @@ namespace backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("total_score")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("type_answer")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.ToTable("SMT_CauTrucDe_ThanhPhans");
+                    b.HasIndex("id_cautrucde");
+
+                    b.ToTable("SMT_CauTrucDe_ThanhPhan");
                 });
 
             modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan_Sub", b =>
@@ -188,7 +192,9 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("SMT_CauTrucDe_ThanhPhan_Subs");
+                    b.HasIndex("id_cautrucde_thanhphan");
+
+                    b.ToTable("SMT_CauTrucDe_ThanhPhan_Sub");
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
@@ -216,6 +222,38 @@ namespace backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
+                {
+                    b.HasOne("backend.Models.SMT_CauTrucDe", "CauTrucDe")
+                        .WithMany("ThanhPhans")
+                        .HasForeignKey("id_cautrucde")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauTrucDe");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan_Sub", b =>
+                {
+                    b.HasOne("backend.Models.SMT_CauTrucDe_ThanhPhan", "ThanhPhan")
+                        .WithMany("Subs")
+                        .HasForeignKey("id_cautrucde_thanhphan")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ThanhPhan");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe", b =>
+                {
+                    b.Navigation("ThanhPhans");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
+                {
+                    b.Navigation("Subs");
                 });
 #pragma warning restore 612, 618
         }

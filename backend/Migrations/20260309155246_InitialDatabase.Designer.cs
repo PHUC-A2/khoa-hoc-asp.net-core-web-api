@@ -12,8 +12,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260309140616_CreateSMT_CauTrucDe_ThanhPhan")]
-    partial class CreateSMT_CauTrucDe_ThanhPhan
+    [Migration("20260309155246_InitialDatabase")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("SMT_CauTrucDes");
+                    b.ToTable("SMT_CauTrucDe");
                 });
 
             modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
@@ -99,7 +99,8 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"));
 
                     b.Property<decimal>("coefficient")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("created_time")
                         .HasColumnType("datetime2");
@@ -132,14 +133,71 @@ namespace backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("total_score")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("type_answer")
                         .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.ToTable("SMT_CauTrucDe_ThanhPhans");
+                    b.HasIndex("id_cautrucde");
+
+                    b.ToTable("SMT_CauTrucDe_ThanhPhan");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan_Sub", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"));
+
+                    b.Property<DateTime>("created_time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("created_user_id")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("id_cautrucde_thanhphan")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("id_chude")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("id_mucdo")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("id_nhomcauhoi")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("last_modified_times")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("last_modified_user_id")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("so_cau")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ten_chude")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ten_muc_tri_nang")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("total_question")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("id_cautrucde_thanhphan");
+
+                    b.ToTable("SMT_CauTrucDe_ThanhPhan_Sub");
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
@@ -167,6 +225,38 @@ namespace backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
+                {
+                    b.HasOne("backend.Models.SMT_CauTrucDe", "CauTrucDe")
+                        .WithMany("ThanhPhans")
+                        .HasForeignKey("id_cautrucde")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CauTrucDe");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan_Sub", b =>
+                {
+                    b.HasOne("backend.Models.SMT_CauTrucDe_ThanhPhan", "ThanhPhan")
+                        .WithMany("Subs")
+                        .HasForeignKey("id_cautrucde_thanhphan")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ThanhPhan");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe", b =>
+                {
+                    b.Navigation("ThanhPhans");
+                });
+
+            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan", b =>
+                {
+                    b.Navigation("Subs");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,12 @@
-﻿namespace backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace backend.Models
 {
+    [Table("SMT_CauTrucDe_ThanhPhan")]
     public class SMT_CauTrucDe_ThanhPhan
     {
+        [Key]
         public long id { get; set; }
 
         public long id_cautrucde { get; set; }
@@ -29,5 +34,11 @@
         public int total_question { get; set; }
 
         public decimal total_score { get; set; }
+
+        // Relationship
+        [ForeignKey("id_cautrucde")]
+        public SMT_CauTrucDe? CauTrucDe { get; set; }
+
+        public ICollection<SMT_CauTrucDe_ThanhPhan_Sub>? Subs { get; set; }
     }
 }
