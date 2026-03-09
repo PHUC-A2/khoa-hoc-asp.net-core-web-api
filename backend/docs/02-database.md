@@ -127,6 +127,11 @@ Add-Migration TestConnection
 
 👉 **KẾT LUẬN: Database kết nối thành công**
 
+=== nếu đổi DB
+B1 đổi tên migration:
+dotnet ef migrations add InitStructureModule
+dotnet ef database update
+
 ---
 
 ## 7️⃣ (Tùy chọn) Tạo database thật trong SQL Server
