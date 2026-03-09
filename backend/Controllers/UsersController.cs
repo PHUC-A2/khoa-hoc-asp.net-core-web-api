@@ -1,6 +1,6 @@
 ﻿using backend.Data;
 using backend.DTOs.common;
-using backend.DTOs.request;
+using backend.DTOs.request.user;
 using backend.DTOs.response;
 using backend.Models;
 using Microsoft.AspNetCore.Identity;

@@ -16,6 +16,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<SMT_CauTrucDeRepository>();
 builder.Services.AddScoped<SMT_CauTrucDeService>();
 
+builder.Services.AddScoped<SMT_CauTrucDe_ThanhPhanRepository>();
+builder.Services.AddScoped<SMT_CauTrucDe_ThanhPhanService>();
+
+
+builder.Services.AddScoped<SMT_CauTrucDe_ThanhPhan_SubRepository>();
+builder.Services.AddScoped<SMT_CauTrucDe_ThanhPhan_SubService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

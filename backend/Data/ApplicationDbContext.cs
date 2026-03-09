@@ -11,6 +11,8 @@ namespace backend.Data
         }
 
         public DbSet<User> Users { get; set; } 
-        public DbSet<SMT_CauTrucDe> SMT_CauTrucDes { get; set; } 
+        public DbSet<SMT_CauTrucDe> SMT_CauTrucDes { get; set; }
+        public DbSet<SMT_CauTrucDe_ThanhPhan> SMT_CauTrucDe_ThanhPhans { get; set; }
+        public DbSet<SMT_CauTrucDe_ThanhPhan_Sub> SMT_CauTrucDe_ThanhPhan_Subs { get; set; }
     }
 }

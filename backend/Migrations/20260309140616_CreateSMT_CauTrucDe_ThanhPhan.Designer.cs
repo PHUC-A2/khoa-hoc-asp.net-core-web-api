@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Data;
 
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260309140616_CreateSMT_CauTrucDe_ThanhPhan")]
+    partial class CreateSMT_CauTrucDe_ThanhPhan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,58 +140,6 @@ namespace backend.Migrations
                     b.HasKey("id");
 
                     b.ToTable("SMT_CauTrucDe_ThanhPhans");
-                });
-
-            modelBuilder.Entity("backend.Models.SMT_CauTrucDe_ThanhPhan_Sub", b =>
-                {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"));
-
-                    b.Property<DateTime>("created_time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("created_user_id")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("id_cautrucde_thanhphan")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("id_chude")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("id_mucdo")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("id_nhomcauhoi")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("last_modified_times")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("last_modified_user_id")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("order")
-                        .HasColumnType("int");
-
-                    b.Property<int>("so_cau")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ten_chude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ten_muc_tri_nang")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("total_question")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SMT_CauTrucDe_ThanhPhan_Subs");
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
